@@ -1,0 +1,1 @@
+import{a as r,u as n}from"./useTransportData-4H_A1EIM.js";import{a as d}from"./index-BaebrHdq.js";function f(){const t=d(s=>s.user),o=r(),u=n(),e=o.data?.find(s=>s.routeId===t.routeId)??o.data?.[0],a=u.data?.find(s=>s.id===e?.routeId);return{user:t,bus:e,route:a,loading:o.isLoading||u.isLoading}}export{f as u};

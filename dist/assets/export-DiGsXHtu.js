@@ -1,0 +1,13 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/jspdf.es.min-Ct-Qga2a.js","assets/index-BaebrHdq.js","assets/vendor-react-CJ4u3bUd.js","assets/vendor-data-D8-cp_mz.js","assets/vendor-radix-BaYBgWaK.js","assets/vendor-motion-BOTXAoSI.js","assets/index-sqrraePd.css"])))=>i.map(i=>d[i]);
+import{h as p,$ as v}from"./index-BaebrHdq.js";/**
+ * @license lucide-react v1.55.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const m={name:"download",size:24,node:[["path",{d:"M12 15V3",key:"m9g1x1"}],["path",{d:"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4",key:"ih7n3h"}],["path",{d:"m7 10 5 5 5-5",key:"brsn70"}]]};m.node;const g=p(m);/**
+ * @license lucide-react v1.55.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const F={name:"file-text",size:24,node:[["path",{d:"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z",key:"1oefj6"}],["path",{d:"M14 2v5a1 1 0 0 0 1 1h5",key:"wfsgrz"}],["path",{d:"M10 9H8",key:"b1mrlr"}],["path",{d:"M16 13H8",key:"t4e002"}],["path",{d:"M16 17H8",key:"z1uh3a"}]]};F.node;const k=p(F);function u(a,s){const n=URL.createObjectURL(a),o=document.createElement("a");o.href=n,o.download=s,o.click(),setTimeout(()=>URL.revokeObjectURL(n),1e3)}function j(a,s){if(!a.length)return;const n=Object.keys(a[0]),o=c=>`"${String(c).replace(/"/g,'""')}"`,t=[n.map(o).join(","),...a.map(c=>n.map(i=>o(c[i]??"")).join(","))].join(`
+`);u(new Blob(["\uFEFF"+t],{type:"text/csv;charset=utf-8"}),`${s}.csv`)}async function _(a,s,n){const{jsPDF:o}=await v(async()=>{const{jsPDF:r}=await import("./jspdf.es.min-Ct-Qga2a.js").then(l=>l.j);return{jsPDF:r}},__vite__mapDeps([0,1,2,3,4,5,6])),t=new o({orientation:"landscape",unit:"pt",format:"a4"}),c=a.length?Object.keys(a[0]):[],i=t.internal.pageSize.getWidth(),d=(i-80)/Math.max(1,c.length);let e=50;t.setFontSize(16).setFont("helvetica","bold").text(n,40,e),t.setFontSize(9).setFont("helvetica","normal").text(`SmartU Transport · generated ${new Date().toLocaleString()}`,40,e+=16),e+=22;const h=()=>{t.setFont("helvetica","bold").setFontSize(9),t.setFillColor(29,78,216).rect(40,e-12,i-80,20,"F").setTextColor(255),c.forEach((r,l)=>t.text(r,46+l*d,e+2,{maxWidth:d-8})),t.setTextColor(20).setFont("helvetica","normal"),e+=22};h(),a.forEach((r,l)=>{e>540&&(t.addPage(),e=50,h()),l%2&&t.setFillColor(243,245,249).rect(40,e-11,i-80,18,"F"),c.forEach((f,x)=>t.text(String(r[f]??""),46+x*d,e+1,{maxWidth:d-8})),e+=18}),t.save(`${s}.pdf`)}export{g as D,k as F,_ as a,j as e};

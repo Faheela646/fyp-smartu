@@ -1,0 +1,1 @@
+import{h as t}from"./vendor-data-D8-cp_mz.js";import{a7 as s,a8 as e}from"./index-BaebrHdq.js";const u={async listRoutes(){return await s(60),e.getState().routes},async listBuses(){return await s(40),e.getState().buses}},o=()=>t({queryKey:["routes"],queryFn:u.listRoutes}),i=()=>t({queryKey:["buses"],queryFn:u.listBuses});export{i as a,o as u};

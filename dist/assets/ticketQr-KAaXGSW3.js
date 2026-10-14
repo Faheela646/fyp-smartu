@@ -1,0 +1,1 @@
+const i=(r,t=Date.now())=>JSON.stringify({v:2,tid:r.id,sid:r.userId,ts:t});function s(r){try{const t=JSON.parse(r);if(t&&t.v===2&&typeof t.tid=="string"&&typeof t.sid=="string"&&typeof t.ts=="number")return t}catch{}return null}export{i as b,s as p};

@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens: RGB channels so Tailwind alpha modifiers work. */
+:root {
+  --background: 243 245 249;
+  --surface: 255 255 255;
+  --foreground: 12 20 38;
+  --muted: 236 240 246;
+  --muted-foreground: 71 82 105;
+  --border: 224 229 238;
+  --ring: 37 99 235;
+
+  --primary: 29 78 216; /* university blue */
+  --primary-foreground: 255 255 255;
+  --primary-soft: 224 235 255;
+  --accent: 13 124 114; /* teal */
+  --accent-foreground: 255 255 255;
+  --accent-soft: 210 247 241;
+
+  --success: 21 128 61;
+  --success-soft: 220 252 231;
+  --warning: 180 83 9;
+  --warning-soft: 254 240 199;
+  --danger: 185 28 28;
+  --danger-soft: 254 226 226;
+  --danger-foreground: 255 255 255;
+
+  --sidebar: 11 19 38;
+  --sidebar-foreground: 226 232 244;
+  --sidebar-muted: 148 163 190;
+  --sidebar-border: 30 41 66;
+
+  --shadow-soft: 0 1px 2px rgb(12 20 38 / 0.04), 0 4px 14px rgb(12 20 38 / 0.05);
+  --shadow-raised: 0 12px 32px rgb(12 20 38 / 0.14), 0 2px 8px rgb(12 20 38 / 0.06);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --background: 8 13 25;
+  --surface: 16 23 40;
+  --foreground: 240 244 252;
+  --muted: 27 37 60;
+  --muted-foreground: 165 177 200;
+  --border: 41 54 82;
+  --ring: 120 160 255;
+
+  --primary: 96 150 255;
+  --primary-foreground: 8 13 25;
+  --primary-soft: 27 44 88;
+  --accent: 52 211 190;
+  --accent-foreground: 8 13 25;
+  --accent-soft: 16 62 62;
+
+  --success: 74 222 128;
+  --success-soft: 18 56 36;
+  --warning: 251 191 36;
+  --warning-soft: 68 48 10;
+  --danger: 252 129 129;
+  --danger-soft: 72 28 28;
+  --danger-foreground: 8 13 25;
+
+  --sidebar: 6 10 20;
+  --sidebar-border: 24 34 56;
+
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 14px rgb(0 0 0 / 0.25);
+  --shadow-raised: 0 12px 32px rgb(0 0 0 / 0.55);
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+  }
+  body {
+    @apply bg-background font-sans text-base text-foreground antialiased;
+    overscroll-behavior-y: none;
+    font-feature-settings: "ss01";
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  h1 {
+    @apply text-2xl font-bold tracking-tight;
+  }
+  h2 {
+    @apply text-xl font-bold tracking-tight;
+  }
+  h3 {
+    @apply text-lg font-semibold;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Map */
+.leaflet-container {
+  font-family: inherit;
+  background: rgb(var(--muted));
+}
+:root[data-theme="dark"] .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7);
+}
+.bus-marker {
+  transition: none;
+}
+.bus-marker .bus-dot {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.35);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+}
+.bus-marker .bus-arrow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Login backdrop motion */
+@keyframes drive {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--muted-foreground) / 0.35) transparent;
+}
