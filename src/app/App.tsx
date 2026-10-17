@@ -18,6 +18,7 @@ const LiveMap = lazy(() => import("@/pages/student/LiveMap"));
 const BookSeat = lazy(() => import("@/pages/student/Book"));
 const MyQR = lazy(() => import("@/pages/student/MyQR"));
 const Payments = lazy(() => import("@/pages/student/Payments"));
+const PaymentPage = lazy(() => import("@/pages/student/PaymentPage"));
 const Fines = lazy(() => import("@/pages/student/Fines"));
 const Registration = lazy(() => import("@/pages/student/Registration"));
 const Announcements = lazy(() => import("@/pages/student/Announcements"));
@@ -70,6 +71,7 @@ export function App() {
           <Route path="attendance" element={<Attendance />} />
           <Route path="qr" element={<MyQR />} />
           <Route path="payments" element={<Payments />} />
+          <Route path="payment" element={<PaymentPage />} />
           <Route path="fines" element={<Fines />} />
           <Route path="registration" element={<RequireRole nested roles={["DAY_SCHOLAR", "FACULTY"]}><Registration /></RequireRole>} />
           <Route path="announcements" element={<Announcements />} />

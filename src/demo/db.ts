@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 import type {
   Announcement, BookingRecord, Driver, FeeItem, Fine, HostelBill, Pricing, Registration, ScanLog, Schedule, Student, ViolationReport,
 } from "@/types/api";
+import { emailForRoll } from "@/lib/email";
 import { DEMO_ACCOUNTS, DEMO_BUSES, DEMO_ROUTES, type DemoAccount } from "./data";
 
 const iso = (offsetDays = 0, hour = 9) => {
@@ -37,7 +38,7 @@ function seedStudents(): Student[] {
       id: i === 0 ? "U-3082" : i === 1 ? "U-3091" : `U-${roll.slice(-4)}${i}`,
       rollNo: roll,
       name,
-      email: `f${roll.slice(0, 2)}${roll.slice(3)}@cfd.nu.edu.pk`,
+      email: emailForRoll(roll),
       phone: `0300-${String(1000000 + i * 91357).slice(0, 7)}`,
       residence: residence as Student["residence"],
       routeId,

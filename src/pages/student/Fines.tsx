@@ -1,27 +1,23 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AlertTriangle, ShieldCheck } from "lucide-react";
 import { PageHeader } from "@/components/domain/PageHeader";
 import { StatCard } from "@/components/domain/StatCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ConfirmDialog } from "@/components/ui/confirm";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState, ErrorState } from "@/components/ui/states";
-import { useAction, useFines } from "@/hooks/useOps";
-import { financeService } from "@/services/ops";
+import { useFines } from "@/hooks/useOps";
 import { useAuthStore } from "@/store/auth";
 import { formatPKR } from "@/lib/utils";
-import type { Fine } from "@/types/api";
 
 const fmt = (d: string) => new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 const tone = { UNPAID: "danger", PAID: "success", WAIVED: "neutral" } as const;
 
 export default function Fines() {
+  const navigate = useNavigate();
   const user = useAuthStore((s) => s.user)!;
   const fines = useFines(user.id);
-  const [target, setTarget] = useState<Fine | null>(null);
-  const pay = useAction((id: string) => financeService.payFine(id, "Online"), { invalidate: [["fines"]], success: "Fine paid", onSuccess: () => setTarget(null) });
 
   const list = fines.data ?? [];
   const owed = list.filter((f) => f.status === "UNPAID").reduce((a, f) => a + f.amount, 0);
@@ -48,7 +44,19 @@ export default function Fines() {
                   <div className="flex items-center gap-3">
                     <Badge tone={tone[f.status]}>{f.status === "UNPAID" ? "Unpaid" : f.status === "PAID" ? "Paid" : "Waived"}</Badge>
                     <span className="min-w-[90px] text-right text-lg sm:text-xl font-extrabold">{formatPKR(f.amount)}</span>
-                    {f.status === "UNPAID" && <Button size="sm" className="h-10 px-4 text-base font-semibold" onClick={() => setTarget(f)}>Pay</Button>}
+                    {f.status === "UNPAID" && (
+                      <Button
+                        size="sm"
+                        className="h-10 px-4 text-base font-semibold"
+                        onClick={() =>
+                          navigate(`/student/payment?fineId=${f.id}&amount=${f.amount}`, {
+                            state: { fineId: f.id, amount: f.amount, reason: f.reason },
+                          })
+                        }
+                      >
+                        Pay
+                      </Button>
+                    )}
                   </div>
                 </li>
               ))}
@@ -56,8 +64,6 @@ export default function Fines() {
           )}
         </CardContent>
       </Card>
-
-      <ConfirmDialog open={!!target} onOpenChange={(o) => !o && setTarget(null)} title="Pay this fine?" description={target ? `${target.reason}: ${formatPKR(target.amount)}` : undefined} confirmLabel="Pay now" cancelLabel="Not now" loading={pay.isPending} onConfirm={() => target && pay.mutate(target.id)} />
     </div>
   );
 }

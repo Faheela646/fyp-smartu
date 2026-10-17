@@ -17,4 +17,5 @@ const badgeVariants = cva("inline-flex items-center gap-1.5 rounded-full px-3.5 
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {}
 
+
 export const Badge = ({ className, tone, ...p }: BadgeProps) => <span className={cn(badgeVariants({ tone }), className)} {...p} />;

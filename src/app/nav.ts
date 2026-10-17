@@ -26,6 +26,7 @@ export const NAV: Record<PortalKind, NavItem[]> = {
     { to: "/student/attendance", label: "Attendance", icon: CalendarCheck },
     { to: "/student/payments", label: "Fees", icon: CreditCard, labelByRole: { DAY_SCHOLAR: "Semester Fee", FACULTY: "Semester Fee", HOSTELITE: "Monthly Fee" } },
     { to: "/student/fines", label: "Fines & Violations", icon: AlertTriangle },
+    { to: "/student/payment", label: "Payment", icon: Wallet, end: true },
     { to: "/student/registration", label: "Registration", icon: ClipboardList, roles: ["DAY_SCHOLAR", "FACULTY"] },
     { to: "/student/announcements", label: "Announcements", icon: Megaphone },
     { to: "/student/notifications", label: "Notifications", icon: Bell },
